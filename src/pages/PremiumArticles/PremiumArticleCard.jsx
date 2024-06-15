@@ -1,8 +1,22 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
+
 const PremiumArticleCard = ({ article }) => {
   const { _id, title, image, publisher, description } = article;
+
+  const axiosCommon = useAxiosCommon();
+
+  const updateViewCount = async (id) => {
+    console.log(id);
+    try {
+      const { data } = await axiosCommon.patch(`/update-view-count/${id}`);
+      console.log(data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   return (
     <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50 shadow-md">
       <div className="">
@@ -27,7 +41,12 @@ const PremiumArticleCard = ({ article }) => {
         </p>
 
         <Link to={`/article/${_id}`}>
-          <button className="btn btn-sm  btn-primary">See Details</button>
+          <button
+            onClick={() => updateViewCount(_id)}
+            className="btn btn-sm  btn-primary"
+          >
+            See Details
+          </button>
         </Link>
       </div>
     </div>
