@@ -160,10 +160,10 @@ const Navbar = () => {
 
           {/* Navbar end */}
           <div className=" navbar-end gap-3">
-            {user && (
-              <Link to="/profile">
-                <button>
-                  {user && user.photoURL ? (
+            <Link to="/profile">
+              <button>
+                {user &&
+                  (user.photoURL ? (
                     <img
                       className="rounded-full"
                       alt="profile"
@@ -173,10 +173,9 @@ const Navbar = () => {
                     />
                   ) : (
                     <RxAvatar className="text-4xl"></RxAvatar>
-                  )}
-                </button>
-              </Link>
-            )}
+                  ))}
+              </button>
+            </Link>
 
             {user ? (
               <button
