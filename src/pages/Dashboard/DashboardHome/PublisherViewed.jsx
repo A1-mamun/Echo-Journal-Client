@@ -1,14 +1,15 @@
+import { Chart } from "react-google-charts";
 import useAxiosCommon from "../../../Hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../components/shared/Loader";
-import { Chart } from "react-google-charts";
 
 const options = {
-  title: "Number of article published by each publisher",
-  is3D: true,
+  chart: {
+    title: "Publishers",
+    subtitle: "Article number, Total view",
+  },
 };
-
-const PublisherArticle = () => {
+const PublisherViewed = () => {
   const axiosCommon = useAxiosCommon();
   const { data: publishers = [], isLoading } = useQuery({
     queryKey: ["publisher"],
@@ -17,22 +18,28 @@ const PublisherArticle = () => {
       return data;
     },
   });
-  const data = [["Publisher", "Published Article"]];
+
+  const data = [["Publisher", "Total article ", "Total view"]];
   publishers.forEach((publisher) => {
-    data.push([publisher.publisherName, publisher.articleCount]);
+    data.push([
+      publisher.publisherName,
+      publisher.articleCount,
+      publisher.totalViews,
+    ]);
   });
+
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className="border-4 border-gray-200 lg:w-1/2 ">
+    <div className="border-4 border-gray-200 w-full p-10">
       <Chart
-        chartType="PieChart"
+        chartType="Bar"
+        width="100%"
+        height="400px"
         data={data}
         options={options}
-        width={"100%"}
-        height={"400px"}
       />
     </div>
   );
 };
 
-export default PublisherArticle;
+export default PublisherViewed;

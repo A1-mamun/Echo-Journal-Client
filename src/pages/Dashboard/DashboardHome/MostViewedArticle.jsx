@@ -30,7 +30,7 @@ const MostViewedArticle = () => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="border-4 border-gray-200 mt-5">
+    <div className="border-4 border-gray-200 lg:w-1/2 ">
       <Heading title={"Top 5 viewed article"}></Heading>
       <Chart chartType="ColumnChart" width="100%" height="400px" data={data} />
     </div>
