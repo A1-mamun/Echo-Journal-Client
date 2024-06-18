@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosCommon from "../../../Hooks/useAxiosCommon";
 import Heading from "../../../components/shared/Heading";
 import Loader from "../../../components/shared/Loader";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: users = [],
@@ -15,7 +15,7 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/users");
+      const { data } = await axiosSecure.get("/users");
       return data;
     },
   });
@@ -23,7 +23,7 @@ const AllUsers = () => {
   //   make admin
   const handleMakeAdmin = async (id) => {
     try {
-      const { data } = await axiosCommon.patch(`/users/${id}`);
+      const { data } = await axiosSecure.patch(`/users/${id}`);
       if (data.modifiedCount) {
         toast.success("Admin created successfully");
         refetch();

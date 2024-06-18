@@ -11,6 +11,19 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
   // interceptors
 
+  // request interceptors
+  axiosSecure.interceptors.request.use(
+    function (config) {
+      config.headers.authorization = `Bearer ${localStorage.getItem(
+        "access-token"
+      )}`;
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+
   // response interceptors
   axiosSecure.interceptors.response.use(
     (res) => {
@@ -24,8 +37,7 @@ const useAxiosSecure = () => {
       return Promise.reject(error);
     }
   );
-  // request interceptors
-  // axios.interceptors.request;
+
   return axiosSecure;
 };
 
