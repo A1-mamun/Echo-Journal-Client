@@ -76,10 +76,15 @@ const Register = () => {
         image: user.photoURL,
         role: "user",
       };
-      console.log(userInfo);
 
       // add user to db
       await axiosCommon.post("/social-users", userInfo);
+      const { data } = await axiosCommon(`/user/${user?.email}`);
+      console.log(data);
+      const currentTime = Date.now();
+      if (data.isPremium === "yes" && currentTime > data.premiumExpireDate) {
+        await axiosCommon.patch(`/not-premium/${user?.email}`);
+      }
       setGoogleLoading(false);
       toast.success("Logged in successfully");
       navigate("/");
