@@ -7,13 +7,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { PiSpinner } from "react-icons/pi";
-import { axiosCommon } from "../../Hooks/useAxiosCommon";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import { useQuery } from "@tanstack/react-query";
 
 const Login = () => {
   const [userLoading, setUserLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { signIn, signInGoogle } = useAuth();
+  const axiosCommon = useAxiosCommon();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,7 +31,14 @@ const Login = () => {
     try {
       setUserLoading(true);
       // log in
-      await signIn(email, password);
+      const { user } = await signIn(email, password);
+      // console.log(user.email);
+      const { data } = await axiosCommon(`/user/${user?.email}`);
+      console.log(data);
+      const currentTime = Date.now();
+      if (data.isPremium === "yes" && currentTime > data.premiumExpireDate) {
+        await axiosCommon.patch(`/not-premium/${user?.email}`);
+      }
       toast.success("Logged in successfully");
       setUserLoading(false);
       // navigate after sign in
@@ -45,7 +54,7 @@ const Login = () => {
     try {
       setGoogleLoading(true);
       const { user } = await signInGoogle();
-      console.log(user.photoURL);
+      // console.log(user.email);
 
       const userInfo = {
         email: user.email,
@@ -53,10 +62,16 @@ const Login = () => {
         image: user.photoURl,
         role: "user",
       };
-      console.log(userInfo);
+      // console.log(userInfo);
       // add user to db
       await axiosCommon.post("/social-users", userInfo);
       setGoogleLoading(false);
+      const { data } = await axiosCommon(`/user/${user?.email}`);
+      console.log(data);
+      const currentTime = Date.now();
+      if (data.isPremium === "yes" && currentTime > data.premiumExpireDate) {
+        await axiosCommon.patch(`/not-premium/${user?.email}`);
+      }
       toast.success("Logged in successfully");
       // navigate after sign in
       navigate(location?.state ? location.state : "/");
