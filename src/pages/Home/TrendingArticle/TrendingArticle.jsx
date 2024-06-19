@@ -32,7 +32,7 @@ const TrendingArticle = () => {
   });
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className="p-10 pb-0 bg-gray-200 rounded-md">
+    <div className="p-10 pb-0 bg-gray-200 rounded-md ">
       <Swiper
         modules={[Navigation, Pagination, A11y, Autoplay, Scrollbar]}
         spaceBetween={20}
@@ -43,8 +43,8 @@ const TrendingArticle = () => {
         className="h-[580px] w-full"
       >
         {articles.slice(0, 6).map((article, idx) => (
-          <SwiperSlide className="pb-10" key={idx}>
-            <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50 h-full">
+          <SwiperSlide className="pb-10 " key={idx}>
+            <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50 h-full z-10">
               <img
                 role="presentation"
                 className="object-cover w-full rounded h-44 dark:bg-gray-500"
