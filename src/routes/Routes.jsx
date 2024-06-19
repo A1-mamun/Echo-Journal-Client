@@ -17,6 +17,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Subscription from "../pages/Subscription/Subscription";
 import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -88,19 +89,35 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <DashboardHome></DashboardHome>,
+        element: (
+          <AdminRoute>
+            <DashboardHome></DashboardHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "all-users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "all-articles",
-        element: <DashboardArticle></DashboardArticle>,
+        element: (
+          <AdminRoute>
+            <DashboardArticle></DashboardArticle>
+          </AdminRoute>
+        ),
       },
       {
         path: "add-publisher",
-        element: <AddPublisher></AddPublisher>,
+        element: (
+          <AdminRoute>
+            <AddPublisher></AddPublisher>
+          </AdminRoute>
+        ),
       },
     ],
   },
