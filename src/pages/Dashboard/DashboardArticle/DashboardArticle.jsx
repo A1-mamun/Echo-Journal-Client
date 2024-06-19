@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosCommon from "../../../Hooks/useAxiosCommon";
 import Heading from "../../../components/shared/Heading";
 import Loader from "../../../components/shared/Loader";
 import toast from "react-hot-toast";
@@ -11,12 +10,13 @@ import { RxCross2 } from "react-icons/rx";
 import { useState } from "react";
 import Modal from "react-modal";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const DashboardArticle = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [declineId, setDeclineId] = useState(null);
 
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: articles = [],
@@ -25,7 +25,7 @@ const DashboardArticle = () => {
   } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/articles");
+      const { data } = await axiosSecure.get("/all-articles");
       return data;
     },
   });
@@ -43,7 +43,7 @@ const DashboardArticle = () => {
   //   make premium
   const handleMakePremium = async (id) => {
     try {
-      const { data } = await axiosCommon.patch(`/make-premium/${id}`);
+      const { data } = await axiosSecure.patch(`/make-premium/${id}`);
       if (data.modifiedCount) {
         toast.success("Make premium successfully");
         refetch();
@@ -56,7 +56,7 @@ const DashboardArticle = () => {
   // Approve
   const handleApprove = async (id) => {
     try {
-      const { data } = await axiosCommon.patch(`/approve/${id}`);
+      const { data } = await axiosSecure.patch(`/approve/${id}`);
       if (data.modifiedCount) {
         toast.success("Article approved");
         refetch();
@@ -68,7 +68,7 @@ const DashboardArticle = () => {
   // Delete
   const handleDelete = async (id) => {
     try {
-      const { data } = await axiosCommon.patch(`/delete/${id}`);
+      const { data } = await axiosSecure.patch(`/delete/${id}`);
       if (data.deletedCount) {
         toast.success("Article deleted");
         refetch();
@@ -82,7 +82,7 @@ const DashboardArticle = () => {
     try {
       e.preventDefault();
       const declineText = { declined_text: e.target.reason.value };
-      const { data } = await axiosCommon.patch(
+      const { data } = await axiosSecure.patch(
         `/decline/${declineId}`,
         declineText
       );
