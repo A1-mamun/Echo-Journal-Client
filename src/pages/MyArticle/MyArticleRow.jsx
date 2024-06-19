@@ -231,36 +231,36 @@ const MyArticleRow = ({ idx, article, refetch }) => {
         <p>{access}</p>
       </td>
       <td className="p-3 text-right">
-        <button
-          onClick={() => handleDelete(_id)}
-          className="btn btn-error btn-sm text-xl"
-        >
-          <span className="">
-            <MdDelete />
-          </span>
-        </button>
-      </td>
-      <td className="p-3 text-right">
-        <button
-          onClick={openUpdateModal}
-          className="btn btn-success btn-sm text-xl"
-        >
-          <span className="">
-            <BiEditAlt />
-          </span>
-        </button>
-      </td>
-      <td className="p-3 text-right">
-        <Link to={`/article/${_id}`}>
+        <div className="tooltip" data-tip="Delete">
           <button
-            // onClick={() => handleDelete(_id)}
-            className="btn btn-info btn-sm text-xl"
+            onClick={() => handleDelete(_id)}
+            className="btn btn-error btn-sm text-xl"
           >
-            <span className="">
-              <BiDetail />
-            </span>
+            <MdDelete />
           </button>
-        </Link>
+        </div>
+      </td>
+      <td className="p-3 text-right">
+        <div className="tooltip" data-tip="Edit">
+          <button
+            onClick={openUpdateModal}
+            className="btn btn-success btn-sm text-xl"
+          >
+            <BiEditAlt />
+          </button>
+        </div>
+      </td>
+      <td className="p-3 text-right">
+        <div className="tooltip" data-tip="Details">
+          <Link to={`/article/${_id}`}>
+            <button
+              // onClick={() => handleDelete(_id)}
+              className="btn btn-info btn-sm text-xl"
+            >
+              <BiDetail />
+            </button>
+          </Link>
+        </div>
       </td>
       <Modal
         isOpen={isUpdateModalOpen}

@@ -3,14 +3,14 @@ import Heading from "../../components/shared/Heading";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import Loader from "../../components/shared/Loader";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
 
 import MyArticleRow from "./MyArticleRow";
 import Container from "../../components/shared/Container";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyArticle = () => {
   const { user } = useAuth();
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: articles = [],
@@ -19,7 +19,7 @@ const MyArticle = () => {
   } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(
+      const { data } = await axiosSecure.get(
         `/my-articles?email=${user?.email}`
       );
       return data;
