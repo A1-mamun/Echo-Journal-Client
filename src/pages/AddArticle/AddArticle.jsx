@@ -8,8 +8,11 @@ import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import moment from "moment";
-import axios from "axios";
 import { PiSpinner } from "react-icons/pi";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useRole from "../../Hooks/useRole";
+import usePremiumUser from "../../Hooks/usePremiumUser";
+import Swal from "sweetalert2";
 
 // tags options
 const options = [
@@ -50,6 +53,8 @@ const options = [
 
 const AddArticle = () => {
   const { user } = useAuth();
+  const [premium] = usePremiumUser();
+  const [role] = useRole();
   const [multiSelectedOption, setMultiSelectedOption] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [addLoading, setAddLoading] = useState(false);
@@ -57,6 +62,7 @@ const AddArticle = () => {
   const selectInputRef = useRef();
 
   const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
 
   const { data: publishers = [] } = useQuery({
     queryKey: ["publishers"],
@@ -80,7 +86,7 @@ const AddArticle = () => {
 
   const Publishers = [];
 
-  // create selest options for publisher
+  // create select options for publisher
   publishers.forEach((publisher) => {
     const value = publisher.name;
     const label = publisher.name;
@@ -89,8 +95,23 @@ const AddArticle = () => {
 
     Publishers.push(newPublisher);
   });
+
   // submit form
   const onSubmit = async (data) => {
+    if (premium === "no" && role !== "admin") {
+      const { data } = await axiosSecure.get(
+        `/my-articles?email=${user?.email}`
+      );
+      if (data.length > 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "As a normal user you can not post more than 1 article!",
+        });
+        setAddLoading(false);
+        return;
+      }
+    }
     const newTag = [];
     multiSelectedOption.forEach((tags) => {
       const tag = tags.value;
@@ -118,7 +139,7 @@ const AddArticle = () => {
     try {
       setAddLoading(true);
       // upload image
-      const { data } = await axios.post(
+      const { data } = await axiosCommon.post(
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_IMGBB_API_KEY
         }`,
@@ -132,7 +153,7 @@ const AddArticle = () => {
       };
 
       // post article to server
-      const res = await axiosCommon.post("/add-article", updateData, {
+      const res = await axiosSecure.post("/add-article", updateData, {
         headers: { "content-type": "application/json" },
       });
       if (res.data.insertedId) {
@@ -144,6 +165,7 @@ const AddArticle = () => {
         toast.success("Article upload successfully");
       }
     } catch (err) {
+      setAddLoading(false);
       toast.error(err.message);
     }
   };
