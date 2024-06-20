@@ -19,6 +19,8 @@ import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import { PiSpinner } from "react-icons/pi";
+import { FaCheck } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
 
 // options for tags
 const options = [
@@ -228,7 +230,13 @@ const MyArticleRow = ({ idx, article, refetch }) => {
         )}
       </td>
       <td className="p-3">
-        <p>{access}</p>
+        <p>
+          {access === "premium" ? (
+            <FaCheck className="text-success" />
+          ) : (
+            <RxCross2 className="text-error" />
+          )}
+        </p>
       </td>
       <td className="p-3 text-right">
         <div className="tooltip" data-tip="Delete">
