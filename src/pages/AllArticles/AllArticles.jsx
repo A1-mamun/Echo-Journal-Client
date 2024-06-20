@@ -42,17 +42,17 @@ const AllArticles = () => {
           onSubmit={handleSearch}
           className="flex items-center justify-center "
         >
-          <label className="input input-bordered flex items-center gap-2 mb-10 max-w-96">
+          <label className="input input-bordered flex items-center gap-1 mb-10 max-w-xs">
             <input
               name="search"
               type="text"
               className="grow"
               placeholder="Search"
             />
-            <button className="btn btn-sm btn-primary"> search</button>
+            <button className="btn btn-sm btn-primary -ml-7"> search</button>
           </label>
         </form>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-5 md:gap-8 lg:gap-10 p-5 mf:p-8 lg:p-10">
           {articles.map((article, idx) => (
             <AllArticleCard key={idx} article={article}></AllArticleCard>
           ))}

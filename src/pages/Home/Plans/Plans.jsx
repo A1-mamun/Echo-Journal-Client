@@ -61,7 +61,7 @@ const Plans = () => {
                 </span>
               </div>
               <p className="leading-relaxed">For premium testing purpose</p>
-              <ul className="space-y-2 dark:text-gray-600">
+              <ul className="space-y-2 dark:text-gray-600 flex-1">
                 <li className="flex items-start space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@ const Plans = () => {
               <p className="leading-relaxed dark:text-gray-600">
                 For professionals
               </p>
-              <ul className="space-y-2 dark:text-gray-600">
+              <ul className="space-y-2 dark:text-gray-600 flex-1">
                 <li className="flex items-start space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

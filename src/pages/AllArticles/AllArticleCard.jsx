@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import usePremiumUser from "../../Hooks/usePremiumUser";
 import useRole from "../../Hooks/useRole";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import useAuth from "../../Hooks/useAuth";
 
 const AllArticleCard = ({ article }) => {
   const { _id, title, image, publisher, description, access } = article;
   const [premium] = usePremiumUser();
   const [role] = useRole();
   const axiosCommon = useAxiosCommon();
+  const { user } = useAuth();
 
   const updateViewCount = async (id) => {
     console.log(id);
@@ -47,7 +49,7 @@ const AllArticleCard = ({ article }) => {
           <Link to={`/article/${_id}`}>
             <button
               onClick={() => updateViewCount(_id)}
-              disabled={premium === "no" && !(role === "admin")}
+              disabled={(premium === "no" && !(role === "admin")) || !user}
               className="btn btn-sm  btn-primary"
             >
               See Details
