@@ -49,7 +49,7 @@ const Home = () => {
           title={"Our Publisher"}
           subtitle={"Enjoy our most popular publisher"}
         ></Heading>
-        <div className="bg-gray-200 rounded-md p-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        <div className="bg-gray-200 rounded-md p-2 md:p-5 lg:p-8 xl:p-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
           {publishers.map((publisher, idx) => (
             <Publisher key={idx} publisher={publisher}></Publisher>
           ))}
