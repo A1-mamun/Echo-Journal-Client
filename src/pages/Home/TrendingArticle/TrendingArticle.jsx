@@ -17,11 +17,7 @@ import useAxiosCommon from "../../../Hooks/useAxiosCommon";
 
 const TrendingArticle = () => {
   const axiosCommon = useAxiosCommon();
-  // useEffect(() => {
-  //   fetch("article.json")
-  //     .then((res) => res.json())
-  //     .then((data) => setArticle(data));
-  // }, []);
+
   const { data: articles = [], isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
@@ -32,22 +28,37 @@ const TrendingArticle = () => {
   });
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className="p-10 pb-0 bg-gray-200 rounded-md ">
+    <div className="p-3 pb-0 md:p-5 md:pb-0 lg:p-7 lg:pb-0 xl:p-10  bg-gray-200 rounded-md ">
       <Swiper
         modules={[Navigation, Pagination, A11y, Autoplay, Scrollbar]}
         spaceBetween={20}
-        slidesPerView={4}
+        // slidesPerView={4}
         scrollbar={{ clickable: true }}
-        // pagination={{ clickable: true }}
-
-        className="h-[580px] w-full"
+        breakpoints={{
+          400: {
+            slidesPerView: 1,
+          },
+          // when window width is >= 640px
+          750: {
+            slidesPerView: 2,
+          },
+          // when window width is >= 768px
+          1000: {
+            slidesPerView: 3,
+          },
+          // when window width is >= 1024px
+          1500: {
+            slidesPerView: 4,
+          },
+        }}
+        className="h-[570px] w-full"
       >
         {articles.slice(0, 6).map((article, idx) => (
-          <SwiperSlide className="pb-10 " key={idx}>
-            <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50 h-full z-10">
+          <SwiperSlide className="pb-3 md:pb-5 lg:pb-10 " key={idx}>
+            <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50 h-full ">
               <img
                 role="presentation"
-                className="object-cover w-full rounded h-44 dark:bg-gray-500"
+                className="object-cover w-full rounded h-40 lg:h-44 dark:bg-gray-500"
                 src={article?.image}
               />
               <div className="p-6 space-y-2 flex flex-col h-[calc(100%-176px)]">
@@ -57,8 +68,8 @@ const TrendingArticle = () => {
                 <span className="text-xs dark:text-gray-600">
                   {article?.publisher}
                 </span>
-                <p className="grow">
-                  {article?.description.slice(0, 250)}{" "}
+                <p className="grow ">
+                  {article?.description.slice(0, 200)}{" "}
                   <span className="text-gray-400">See more...</span>{" "}
                 </p>
                 <Link to={`article/${article?._id}`}>
