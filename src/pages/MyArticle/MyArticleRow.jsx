@@ -193,16 +193,20 @@ const MyArticleRow = ({ idx, article, refetch }) => {
   };
   return (
     <tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
-      <td className="p-3">
+      <td className="p-3 ">
         <p>{idx + 1}</p>
       </td>
-      <td className="p-1">
-        <img className="h-16 w-20 rounded-md" src={image} alt="" />
+      <td className="p-1 ">
+        <img
+          className="w-12 h-10 md:w-16 md:h-14 lg:h-16 lg:w-20 rounded-md"
+          src={image}
+          alt=""
+        />
       </td>
-      <td className="p-3">
+      <td className="p-1 md:p-3 text-sm md:text-base">
         <p>{title}</p>
       </td>
-      <td className="p-3">
+      <td className="p-1 md:p-3">
         {status === "Declined" ? (
           <>
             <div className="flex flex-col gap-1">
@@ -229,7 +233,7 @@ const MyArticleRow = ({ idx, article, refetch }) => {
           </>
         )}
       </td>
-      <td className="p-3">
+      <td className="p-1 md:p-3">
         <p>
           {access === "premium" ? (
             <FaCheck className="text-success" />
@@ -238,7 +242,7 @@ const MyArticleRow = ({ idx, article, refetch }) => {
           )}
         </p>
       </td>
-      <td className="p-3 text-right">
+      <td className="p-1 md:p-3 text-right">
         <div className="tooltip" data-tip="Delete">
           <button
             onClick={() => handleDelete(_id)}
@@ -248,7 +252,7 @@ const MyArticleRow = ({ idx, article, refetch }) => {
           </button>
         </div>
       </td>
-      <td className="p-3 text-right">
+      <td className="p-1 md:p-3 text-right">
         <div className="tooltip" data-tip="Edit">
           <button
             onClick={openUpdateModal}
@@ -258,7 +262,7 @@ const MyArticleRow = ({ idx, article, refetch }) => {
           </button>
         </div>
       </td>
-      <td className="p-3 text-right">
+      <td className="p-1 md:p-3 text-right">
         <div className="tooltip" data-tip="Details">
           <Link to={`/article/${_id}`}>
             <button

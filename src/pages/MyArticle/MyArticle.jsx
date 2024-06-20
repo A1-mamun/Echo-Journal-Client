@@ -46,9 +46,9 @@ const MyArticle = () => {
               <col />
             </colgroup>
             <thead className="dark:bg-gray-300">
-              <tr className="text-left">
-                <th className="p-3">#</th>
-                <th className="p-3">Photo</th>
+              <tr className="text-left text-sm md:text-base">
+                <th className="p-3 ">#</th>
+                <th className="p-3 ">Photo</th>
                 <th className="p-3">Title</th>
                 <th className="p-3">Status</th>
                 <th className="p-3">isPremium</th>
