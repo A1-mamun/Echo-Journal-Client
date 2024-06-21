@@ -23,7 +23,7 @@ const PublisherArticle = () => {
   });
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className="border-4 border-gray-200 lg:w-1/2 ">
+    <div className="border-4 border-gray-200  lg:w-1/2 ">
       <Chart
         chartType="PieChart"
         data={data}
