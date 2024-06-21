@@ -34,7 +34,7 @@ const AllUsers = () => {
   };
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className="bg-gray-200 rounded-md py-10 px-7 min-h-[calc(100vh-20px)]">
+    <div className="p-2 mx-auto sm:p-4 dark:text-gray-800 mt-5 md:mt-10 lg:mt-20 min-h-[calc(100vh-355px)]">
       <Helmet>
         <title>EchoJournal | Dashboard All Users</title>
       </Helmet>
@@ -48,8 +48,8 @@ const AllUsers = () => {
             <col />
             <col />
           </colgroup>
-          <thead className="dark:bg-gray-300">
-            <tr className="text-left">
+          <thead className="dark:bg-gray-300 ">
+            <tr className="text-left text-sm md:text-base">
               <th className="p-3">#</th>
               <th className="p-3">Photo</th>
               <th className="p-3">Name</th>
@@ -57,7 +57,7 @@ const AllUsers = () => {
               <th className="p-3">Role</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-sm md:text-base">
             {users.map((user, idx) => (
               <tr
                 key={idx}
@@ -68,20 +68,20 @@ const AllUsers = () => {
                 </td>
                 <td className="p-1">
                   <img
-                    className="h-16 w-20 rounded-md"
+                    className="w-12 h-10 md:w-16 md:h-14 lg:h-16 lg:w-20 rounded-md"
                     src={user?.image}
                     alt=""
                   />
                 </td>
-                <td className="p-3">
+                <td className="p-1 md:p-3 ">
                   <p>{user?.name}</p>
                 </td>
 
-                <td className="p-3">
+                <td className="p-1 md:p-3 ">
                   <p>{user?.email}</p>
                 </td>
 
-                <td className="p-3 ">
+                <td className="p-1 md:p-3  ">
                   {user?.role === "admin" ? (
                     <>
                       <p className="badge badge-lg badge-info">Admin</p>

@@ -194,7 +194,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="flex justify-between gap-10">
-        <div className="hidden lg:block">
+        <div className="hidden lg:block mt-5">
           <div className=" min-h-screen p-3 space-y-2 w-60 bg-gray-200 text-gray-800">
             <div className="flex items-center p-2 space-x-4">
               <img
@@ -222,7 +222,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex-1 mt-5 z-0">
+        <div className="w-full flex-1 mt-5 z-0">
           <Outlet></Outlet>
         </div>
       </div>
