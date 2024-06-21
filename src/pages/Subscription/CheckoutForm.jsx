@@ -116,7 +116,7 @@ const CheckoutForm = () => {
   };
   return (
     <div className="flex  justify-center mt-10">
-      <div className="min-w-[500px] pt-5 px-10 pb-10 bg-gray-200 rounded-lg">
+      <div className="w-[350px] md:w-[400px] lg:w-[500px] pt-5 px-3 md:px-6 lg:px-10 pb-10 bg-gray-200 rounded-lg">
         <Heading title={"Card Info"}></Heading>
         <form onSubmit={handleSubmit} className="space-y-5 flex flex-col">
           <CardElement

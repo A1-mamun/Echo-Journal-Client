@@ -22,8 +22,8 @@ const Subscription = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="h-full flex justify-center items-center bg-gradient-to-t from-[#1b1820e5]  to-[#150B2B22] rounded-lg">
-          <h2 className="text-3xl font-bold text-white max-w-sm text-center">
+        <div className="h-full flex justify-center items-center bg-gradient-to-t from-[#1b1820e5]  to-[#150B2B22] rounded-lg p-10">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white max-w-sm text-center">
             To enjoy our premium article please complete your payment
           </h2>
         </div>

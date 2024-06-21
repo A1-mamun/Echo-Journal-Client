@@ -171,7 +171,7 @@ const AddArticle = () => {
   };
 
   return (
-    <div className="my-10 container mx-auto bg-gray-100 rounded-xl px-5 md:px-8 lg:px-20 py-10 mt-28">
+    <div className="my-10 container mx-auto bg-gray-100 rounded-xl px-5 md:px-8 lg:px-20 py-10 mt-5 md:mt-10 lg:mt-16 xl:mt-24">
       <Helmet>
         <title>EchoJournal | Add Article</title>
       </Helmet>
