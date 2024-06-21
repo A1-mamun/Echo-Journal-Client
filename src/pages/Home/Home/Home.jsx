@@ -11,10 +11,12 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import usePremiumUser from "../../../Hooks/usePremiumUser";
+import useRole from "../../../Hooks/useRole";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [premium] = usePremiumUser();
+  const [role] = useRole();
   const axiosCommon = useAxiosCommon();
 
   const { data: publishers = [] } = useQuery({
@@ -60,7 +62,7 @@ const Home = () => {
         ></Heading>
         <Plans></Plans>
         <Statistics></Statistics>
-        {premium === "no" && (
+        {premium === "no" && role !== "admin" && (
           <Modal
             isOpen={isOpen}
             onRequestClose={closeModal}
