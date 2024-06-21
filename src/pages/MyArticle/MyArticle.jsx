@@ -28,7 +28,7 @@ const MyArticle = () => {
   if (isLoading) return <Loader></Loader>;
   return (
     <Container>
-      <div className="p-2 mx-auto sm:p-4 dark:text-gray-800 mt-5 md:mt-10 lg:mt-20 min-h-[calc(100vh-355px)] border border-red-700">
+      <div className="p-2 mx-auto sm:p-4 dark:text-gray-800 mt-5 md:mt-10 lg:mt-20 min-h-[calc(100vh-355px)]">
         <Helmet>
           <title>EchoJournal | My Articles</title>
         </Helmet>

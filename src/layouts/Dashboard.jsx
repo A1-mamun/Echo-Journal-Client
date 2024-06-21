@@ -194,8 +194,8 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="flex justify-between gap-10">
-        <div className="hidden lg:block mt-5">
-          <div className=" min-h-screen p-3 space-y-2 w-60 bg-gray-200 text-gray-800">
+        <div className=" hidden lg:block mt-5">
+          <div className="lg:sticky lg:top-0 min-h-screen p-3 space-y-2 w-60 bg-gray-200 text-gray-800">
             <div className="flex items-center p-2 space-x-4">
               <img
                 src={user?.photoURL}
